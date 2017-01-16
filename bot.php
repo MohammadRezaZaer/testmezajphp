@@ -1,5 +1,7 @@
 <?php
-ob_start();
+ob_start()
+    echo("and");
+
 define('API_KEY','329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA');
 
 function makeHTTPRequest($method,$datas=[]){
