@@ -1,6 +1,12 @@
 <?php
-$update = json_decode(file_get_contents('php://input'));
 
+$w = stream_get_wrappers();
+echo 'openssl: ',  extension_loaded  ('openssl') ? 'yes':'no', "\n";
+echo 'http wrapper: ', in_array('http', $w) ? 'yes':'no', "\n";
+echo 'https wrapper: ', in_array('https', $w) ? 'yes':'no', "\n";
+echo 'wrappers: ', var_export($w);
+
+$update = json_decode(file_get_contents('php://input'));
 
 
 define('API_KEY','329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA');
@@ -13,6 +19,7 @@ function makeHTTPRequest($method,$datas=[]){
 
 $opts = array('http' =>
     array(
+            
         'method'  => 'POST',
         'header'  => 'Content-type: application/x-www-form-urlencoded',
         'content' => $postdata
@@ -55,7 +62,7 @@ if(isset($update->callback_query)){
     );
 
 }else{
-    var_dump(makeHTTPRequest('sendMessage',[
+    makeHTTPRequest('sendMessage',[
         'chat_id'=>$update->message->chat->id,
         'text'=>"اولین تلاش \n زمان :\n ".date('d M y -  h:i:s'),
         'reply_markup'=>json_encode([
@@ -65,6 +72,6 @@ if(isset($update->callback_query)){
                 ]
             ]
         ])
-    ]));
+    ]);
 }
 
