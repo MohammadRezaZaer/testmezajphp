@@ -5,8 +5,7 @@ $update = file_get_contents('php://input');
 $data = "https://api.telegram.org/bot329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA/sendmessage?chat_id=94036610&text=salam".$update;
 $response = file_get_contents($data);
 $update = json_decode(file_get_contents('php://input'));
-$data = "https://api.telegram.org/bot329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA/sendmessage?chat_id=94036610&text=salam".$update->message->chat->username;
-$response = file_get_contents($data);
+
 
 $postdata = http_build_query(
     array(
@@ -24,7 +23,8 @@ $opts = array('http' =>
 );
 
 $context  = stream_context_create($opts);
-
+$data = "https://api.telegram.org/bot329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA/sendmessage?chat_id=94036610&text=salam".$context;
+$response = file_get_contents($data);
 $result = file_get_contents('https://api.telegram.org/bot329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA/sendmessage', false, $context);
 
 
