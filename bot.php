@@ -1,32 +1,34 @@
 <?php
-$update = file_get_contents('php://input');
+$update = json_decode(file_get_contents('php://input'));
 
-$data = "https://api.telegram.org/bot329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA/sendmessage?chat_id=94036610&text=salam".$update;
-$response = file_get_contents($data);
 
-echo "androidiiiiiii";
-ob_start();
+
 define('API_KEY','329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA');
 
 function makeHTTPRequest($method,$datas=[]){
-    $url = "https://api.telegram.org/bot".API_KEY."/".$method;
-    $ch = curl_init();
-    curl_setopt($ch,CURLOPT_URL,$url);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($datas));
-    $res = curl_exec($ch);
-    if(curl_error($ch)){
-        var_dump(curl_error($ch));
-    }else{
-        return json_decode($res);
-    }
+        $url = "https://api.telegram.org/bot".API_KEY."/".$method;
+
+    
+    $postdata = http_build_query($datas)
+
+$opts = array('http' =>
+    array(
+        'method'  => 'POST',
+        'header'  => 'Content-type: application/x-www-form-urlencoded',
+        'content' => $postdata
+    )
+);
+
+$context  = stream_context_create($opts);
+
+$result = file_get_contents($url, false, $context);
+    
 }
 
 
 
 
 // Fetching UPDATE
-$update = json_decode(file_get_contents('php://input'));
 
 if(isset($update->callback_query)){
     $callbackMessage = 'آپدیت شد';
@@ -66,4 +68,3 @@ if(isset($update->callback_query)){
     ]));
 }
 
-file_put_contents('log',ob_get_clean());
