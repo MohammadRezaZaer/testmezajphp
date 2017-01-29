@@ -1,35 +1,32 @@
 <?php
 
-$w = stream_get_wrappers();
-echo 'openssl: ',  extension_loaded  ('openssl') ? 'yes':'no', "\n";
-echo 'http wrapper: ', in_array('http', $w) ? 'yes':'no', "\n";
-echo 'https wrapper: ', in_array('https', $w) ? 'yes':'no', "\n";
-echo 'wrappers: ', var_export($w);
+
 
 $update = json_decode(file_get_contents('php://input'));
 
-
+echo $update->message->chat->id;
 define('API_KEY','329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA');
 
 function makeHTTPRequest($method,$datas=[]){
-        $url = "https://api.telegram.org/bot".API_KEY."/".$method;
-
-    
+    $url = "https://api.telegram.org/bot".API_KEY."/".$method;
     $postdata = http_build_query($datas)
 
 $opts = array('http' =>
-    array(
-            
+    array(    
         'method'  => 'POST',
         'header'  => 'Content-type: application/x-www-form-urlencoded',
         'content' => $postdata
-    )
+    ),
+    "ssl"=>array(
+            "verify_peer"=>false,
+            "verify_peer_name"=>false,
+        )
 );
 
 $context  = stream_context_create($opts);
 
 $result = file_get_contents($url, false, $context);
-    
+            
 }
 
 
