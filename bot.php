@@ -10,8 +10,12 @@ var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->chat->
 
 if ( isset( $update->callback_query ) )
 {
+    
 		var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->
-				chat->id, 'text' => "----" ] ) ) ;
+				chat->id, 'text' => "........,,," . date( 'd M y -  h:i:s' ),
+				'reply_markup' => json_encode( ['inline_keyboard' => [[['text' =>
+				"sss زمان", 'callback_data' => '1']]]] )] ) ) ;
+                
 		$callbackMessage = '...آپدیت شد' ;
 
 
