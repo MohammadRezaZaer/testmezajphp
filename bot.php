@@ -41,12 +41,12 @@ if(isset($update->callback_query)){
 	    )
 	);
 	$encodedMarkup = json_encode($replyMarkup);
-	var_dump(makeHTTPRequest('sendMessage',[
+/*	var_dump(makeHTTPRequest('sendMessage',[
 		'chat_id'=>$update->message->chat->id,
 		'text'=>"اولین تلاش \n زمان :\n ".date('d M y -  h:i:s').file_get_contents('php://input'),
 		'reply_markup'=>$encodedMarkup
-    	]));
- /*   var_dump(makeHTTPRequest('sendMessage',[
+    	]));*/
+   var_dump(makeHTTPRequest('sendMessage',[
         'chat_id'=>$update->message->chat->id,
         'text'=>"اولین تلاش \n زمان :\n ".date('d M y -  h:i:s'),
         'reply_markup'=>json_encode([
@@ -56,7 +56,7 @@ if(isset($update->callback_query)){
                 ]
             ]
         ])
-    ]));*/
+    ]));
 }
 function makeHTTPRequest($method,$datas=[]){
     $url = "https://api.telegram.org/bot".API_KEY."/".$method;
