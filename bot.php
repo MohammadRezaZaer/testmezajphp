@@ -15,15 +15,6 @@ if ( isset( $update->callback_query ) )
 		//$callbackMessage = '...آپدیت شد' ;
 
 
-		//	var_dump( makeHTTPRequest( 'answerCallbackQuery', ['callback_query_id' => $update->
-		//				callback_query->id, 'text' => $callbackMessage] ) ) ;
-		$chat_id = $update->callback_query->message->chat->id ;
-		$message_id = $update->callback_query->message->message_id ;
-		$tried = $update->callback_query->data + 1 ;
-		var_dump( makeHTTPRequest( 'editMessageText', ['chat_id' => $chat_id,
-				'message_id' => $message_id, 'text' => ( $tried ) . " امین تلاش \n زمان : \n" .
-				date( 'd M y -  h:i:s' ), 'reply_markup' => json_encode( ['inline_keyboard' => [[['text' =>
-				"رفرش زمان", 'callback_data' => "$tried"]]]] )] ) ) ;
 
 
 
