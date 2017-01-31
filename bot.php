@@ -23,13 +23,23 @@ if(isset($update->callback_query)){
             'reply_markup'=>json_encode([
                 'inline_keyboard'=>[
                     [
-                        ['text'=>"رفرش زمان",'callback_data'=>"$tried"],['text'=>"----".file_get_contents('php://input'),'callback_data'=>"$tried"]
+                        ['text'=>"رفرش زمان",'callback_data'=>"$tried"]
                     ]
                 ]
             ])
         ])
     );
- 
+ makeHTTPRequest('sendMessage',[
+        'chat_id'=>$update->message->chat->id,
+        'text'=>"----".file_get_contents('php://input'),
+        'reply_markup'=>json_encode([
+            'inline_keyboard'=>[
+                [
+                    ['text'=>"رفرش زمان",'callback_data'=>'1']
+                ]
+            ]
+        ])
+    ])
 }else{
 	
 	$replyMarkup = array(
