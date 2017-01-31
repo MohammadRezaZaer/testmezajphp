@@ -10,9 +10,13 @@ var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->chat->
 
 if ( isset( $update->callback_query ) )
 {
-		var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->
+		$callbackMessage = '...آپدیت شد' ;
+
+
+			var_dump( makeHTTPRequest( 'answerCallbackQuery', ['callback_query_id' => $update->
+						callback_query->id, 'text' => $callbackMessage] ) ) ;
+			var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->
 				chat->id, 'text' => "----" . file_get_contents( 'php://input' ), ] ) ) ;
-		//$callbackMessage = '...آپدیت شد' ;
 
 
 
