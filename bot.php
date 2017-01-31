@@ -39,7 +39,7 @@ if(isset($update->callback_query)){
                 ]
             ]
         ])
-    ])
+    ]);
 }else{
 	
 	$replyMarkup = array(
