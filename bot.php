@@ -22,15 +22,15 @@ if(isset($update->callback_query)){
             'text'=>($tried)." امین تلاش \n زمان : \n".date('d M y -  h:i:s')."\n".file_get_contents('php://input')
 		,
             'reply_markup'=>json_encode([
-                'inline_keyboard'=>[
+                'inline_keyboard'=>
                     [
                         ['text'=>"رفرش زمان",'callback_data'=>"$tried"]
                     ]
-		'ReplyKeyboardMarkup'=>[
+		,'ReplyKeyboardMarkup'=>
                     [
                         ['text'=>"بعدی"],['text'=>"نتیجه"],['text'=>"از نو"]
                     ]
-                ]
+                
             ])
         ])
     );
