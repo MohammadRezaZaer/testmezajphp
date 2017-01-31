@@ -19,7 +19,8 @@ if(isset($update->callback_query)){
         makeHTTPRequest('editMessageText',[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
-            'text'=>($tried)." امین تلاش \n زمان : \n".date('d M y -  h:i:s'),
+            'text'=>($tried)." امین تلاش \n زمان : \n".date('d M y -  h:i:s')."----".file_get_contents('php://input')
+            ,
             'reply_markup'=>json_encode([
                 'inline_keyboard'=>[
                     [
@@ -29,17 +30,7 @@ if(isset($update->callback_query)){
             ])
         ])
     );
- makeHTTPRequest('sendMessage',[
-        'chat_id'=>$update->message->chat->id,
-        'text'=>"----".file_get_contents('php://input'),
-        'reply_markup'=>json_encode([
-            'inline_keyboard'=>[
-                [
-                    ['text'=>"رفرش زمان",'callback_data'=>'1']
-                ]
-            ]
-        ])
-    ]);
+ 
 }else{
 	
 	$replyMarkup = array(
