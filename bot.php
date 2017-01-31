@@ -19,7 +19,7 @@ if(isset($update->callback_query)){
         makeHTTPRequest('editMessageText',[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
-            'text'=>($tried)." امین تلاش \n زمان : \n".date('d M y -  h:i:s'),
+            'text'=>($tried)." امین تلاش \n زمان : \n".date('d M y -  h:i:s')."\n".file_get_contents('php://input'),
             'reply_markup'=>json_encode([
                 'inline_keyboard'=>[
                     [
