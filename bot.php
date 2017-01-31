@@ -10,15 +10,20 @@ var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->chat->
 
 if ( isset( $update->callback_query ) )
 {
+		var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->
+				chat->id, 'text' => "----" ] ) ) ;
 		$callbackMessage = '...آپدیت شد' ;
 
 
 			var_dump( makeHTTPRequest( 'answerCallbackQuery', ['callback_query_id' => $update->
 						callback_query->id, 'text' => $callbackMessage] ) ) ;
-			var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->
-				chat->id, 'text' => "----" . file_get_contents( 'php://input' ), ] ) ) ;
-
-
+		$chat_id = $update->callback_query->message->chat->id ;
+		$message_id = $update->callback_query->message->message_id ;
+		$tried = $update->callback_query->data + 1 ;
+		var_dump( makeHTTPRequest( 'editMessageText', ['chat_id' => $chat_id,
+				'message_id' => $message_id, 'text' => ( $tried ) . " امین تلاش \n زمان : \n" .
+				date( 'd M y -  h:i:s' ), 'reply_markup' => json_encode( ['inline_keyboard' => [[['text' =>
+				"رفرش زمان", 'callback_data' => "$tried"]]]] )] ) ) ;
 
 
 
