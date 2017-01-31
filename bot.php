@@ -26,7 +26,7 @@ if(isset($update->callback_query)){
                     [
                         ['text'=>"رفرش زمان",'callback_data'=>"$tried"]
                     ]
-		,'ReplyKeyboardMarkup'=>
+		,'keyboard'=>
                     [
                         ['text'=>"بعدی"],['text'=>"نتیجه"],['text'=>"از نو"]
                     ]
