@@ -27,10 +27,7 @@ if(isset($update->callback_query)){
                     [
                         ['text'=>"رفرش زمان",'callback_data'=>"$tried"]
                     ]
-		,'keyboard'=>
-                    [
-                       array("بعدی", "نتیجه","از نو")
-                    ]
+		
                 
             ])
         ])
@@ -46,7 +43,7 @@ if(isset($update->callback_query)){
 	$encodedMarkup = json_encode($replyMarkup);
 	var_dump(makeHTTPRequest('sendMessage',[
 		'chat_id'=>$update->message->chat->id,
-		'text'=>"اولین تلاش \n زمان :\n ".date('d M y -  h:i:s'),
+		'text'=>"اولین تلاش \n زمان :\n ".date('d M y -  h:i:s').file_get_contents('php://input'),
 		'reply_markup'=>$encodedMarkup
     	]));
  /*   var_dump(makeHTTPRequest('sendMessage',[
