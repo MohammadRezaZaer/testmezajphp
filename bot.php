@@ -22,6 +22,9 @@ if ( isset( $update->callback_query ) )
 				'message_id' => $message_id, 'text' => ( $tried ) . " امین تلاش \n زمان : \n" .
 				date( 'd M y -  h:i:s' ), 'reply_markup' => json_encode( ['inline_keyboard' => [[['text' =>
 				"رفرش زمان", 'callback_data' => "$tried"]]]] )] ) ) ;
+                
+  var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->chat->
+		id, 'text' => "----" . file_get_contents( 'php://input' ), ] ) ) ;
 
 }
 else
