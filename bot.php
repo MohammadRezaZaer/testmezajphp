@@ -7,7 +7,7 @@ $update = json_decode(file_get_contents('php://input'));
 
 
 if(isset($update->callback_query)){
-    $callbackMessage = 'آپدیت شد';
+    $callbackMessage = '...آپدیت شد';
     var_dump(makeHTTPRequest('answerCallbackQuery',[
         'callback_query_id'=>$update->callback_query->id,
         'text'=>$callbackMessage
@@ -15,25 +15,21 @@ if(isset($update->callback_query)){
     $chat_id = $update->callback_query->message->chat->id;
     $message_id = $update->callback_query->message->message_id;
     $tried = $update->callback_query->data+1;
-
     var_dump(
         makeHTTPRequest('editMessageText',[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
-            'text'=>($tried)." امین تلاش \n زمان : \n".date('d M y -  h:i:s')."\n",
+            'text'=>($tried)." امین تلاش \n زمان : \n".date('d M y -  h:i:s'),
             'reply_markup'=>json_encode([
-                'inline_keyboard'=>
+                'inline_keyboard'=>[
                     [
-                        ['text'=>"رفرش زمان",'callback_data'=>"$tried"],
-			['text'=>$update,'callback_data'=>"$tried"],
-			    ['text'=>file_get_contents('php://input'),'callback_data'=>"$tried"]
+                        ['text'=>"رفرش زمان",'callback_data'=>"$tried"],['text'=>"----".file_get_contents('php://input'),'callback_data'=>"$tried"]
                     ]
-		
-                
+                ]
             ])
         ])
     );
-
+ 
 }else{
 	
 	$replyMarkup = array(
@@ -42,11 +38,7 @@ if(isset($update->callback_query)){
 	    )
 	);
 	$encodedMarkup = json_encode($replyMarkup);
-/*	var_dump(makeHTTPRequest('sendMessage',[
-		'chat_id'=>$update->message->chat->id,
-		'text'=>"اولین تلاش \n زمان :\n ".date('d M y -  h:i:s').file_get_contents('php://input'),
-		'reply_markup'=>$encodedMarkup
-    	]));*/
+
    var_dump(makeHTTPRequest('sendMessage',[
         'chat_id'=>$update->message->chat->id,
         'text'=>"اولین تلاش \n زمان :\n ".date('d M y -  h:i:s'),
