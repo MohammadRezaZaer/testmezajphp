@@ -15,6 +15,7 @@ if(isset($update->callback_query)){
     $chat_id = $update->callback_query->message->chat->id;
     $message_id = $update->callback_query->message->message_id;
     $tried = $update->callback_query->data+1;
+
     var_dump(
         makeHTTPRequest('editMessageText',[
             'chat_id'=>$chat_id,
@@ -28,7 +29,7 @@ if(isset($update->callback_query)){
                     ]
 		,'keyboard'=>
                     [
-                        ['text'=>"بعدی"],['text'=>"نتیجه"],['text'=>"از نو"]
+                       array("بعدی", "نتیجه","از نو")
                     ]
                 
             ])
@@ -36,7 +37,19 @@ if(isset($update->callback_query)){
     );
 
 }else{
-    var_dump(makeHTTPRequest('sendMessage',[
+	
+	$replyMarkup = array(
+	   'keyboard' => array(
+		array("A", "B")
+	    )
+	);
+	$encodedMarkup = json_encode($replyMarkup);
+	var_dump(makeHTTPRequest('sendMessage',[
+		'chat_id'=>$update->message->chat->id,
+		'text'=>"اولین تلاش \n زمان :\n ".date('d M y -  h:i:s'),
+		'reply_markup'=>$encodedMarkup
+    	]));
+ /*   var_dump(makeHTTPRequest('sendMessage',[
         'chat_id'=>$update->message->chat->id,
         'text'=>"اولین تلاش \n زمان :\n ".date('d M y -  h:i:s'),
         'reply_markup'=>json_encode([
@@ -46,7 +59,7 @@ if(isset($update->callback_query)){
                 ]
             ]
         ])
-    ]));
+    ]));*/
 }
 function makeHTTPRequest($method,$datas=[]){
     $url = "https://api.telegram.org/bot".API_KEY."/".$method;
