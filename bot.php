@@ -10,17 +10,11 @@ var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->chat->
 
 if ( isset( $update->callback_query ) )
 {
-    
-		var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $update->message->
-				chat->id, 'text' => "........,,," . date( 'd M y -  h:i:s' ),
-				'reply_markup' => json_encode( ['inline_keyboard' => [[['text' =>
-				"sss زمان", 'callback_data' => '1']]]] )] ) ) ;
-                
 		$callbackMessage = '...آپدیت شد' ;
 
 
-			var_dump( makeHTTPRequest( 'answerCallbackQuery', ['callback_query_id' => $update->
-						callback_query->id, 'text' => $callbackMessage] ) ) ;
+		var_dump( makeHTTPRequest( 'answerCallbackQuery', ['callback_query_id' => $update->
+				callback_query->id, 'text' => $callbackMessage] ) ) ;
 		$chat_id = $update->callback_query->message->chat->id ;
 		$message_id = $update->callback_query->message->message_id ;
 		$tried = $update->callback_query->data + 1 ;
@@ -29,7 +23,8 @@ if ( isset( $update->callback_query ) )
 				date( 'd M y -  h:i:s' ), 'reply_markup' => json_encode( ['inline_keyboard' => [[['text' =>
 				"رفرش زمان", 'callback_data' => "$tried"]]]] )] ) ) ;
 
-
+		var_dump( makeHTTPRequest( 'sendMessage', ['chat_id' => $chat_id, 'text' =>
+				"----" . file_get_contents( 'php://input' ), ] ) ) ;
 
 }
 else
