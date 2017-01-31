@@ -20,11 +20,13 @@ if(isset($update->callback_query)){
         makeHTTPRequest('editMessageText',[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
-            'text'=>file_get_contents('php://input').($tried)." امین تلاش \n زمان : \n".date('d M y -  h:i:s')."\n",
+            'text'=>($tried)." امین تلاش \n زمان : \n".date('d M y -  h:i:s')."\n",
             'reply_markup'=>json_encode([
                 'inline_keyboard'=>
                     [
-                        ['text'=>"رفرش زمان",'callback_data'=>"$tried"]
+                        ['text'=>"رفرش زمان",'callback_data'=>"$tried"],
+			['text'=>$update,'callback_data'=>"$tried"],
+			    ['text'=>file_get_contents('php://input'),'callback_data'=>"$tried"]
                     ]
 		
                 
