@@ -1,6 +1,6 @@
 <?php
 $update =  file_get_contents( 'php://input' )  ;
-$hostres = makeHTTPRequestTohost('http://changekey.ir/getqs.php', $update);
+$hostres = makeHTTPRequestTohost('http://changekey.ir/yaMohammad/sitebot', $update);
 
 function makeHTTPRequestTohost($url, $datas)
 {
